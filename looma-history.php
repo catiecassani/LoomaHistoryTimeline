@@ -18,17 +18,20 @@ Description: Creates a timeline with search and hover functions. Information acc
     <div id="main-container-vertical">
       <label for="keywords">Search:</label><input id="keywords" class="searchBar" size="18" placeholder="enter words to search">
 
-      <button class="scrollButtonUp">   <img src="images/looma-up.png">        </button>
-      <button class="scrollButtonDown"> <img src="images/looma-down.png">      </button>
-      <button class="returnToTop">      <img src="images/double-up-arrow.png"> </button><br>
+      <button class="scrollButtonLeft">   <img src="images/back-arrow.png">        </button>
+      <button class="scrollButtonRight"> <img src="images/forward-arrow.png">      </button>
+      <button class="returnToLeftmost">      <img src="images/reverse-double-arrow.png"> </button><br>
 
       <?php
 
         //Load Timeline
-        if (isset($_REQUEST["chapterToLoad"]))
-        {$ch_id = $_REQUEST["chapterToLoad"];
+        if (isset($_REQUEST["title"]) || (isset($_REQUEST["chapterToLoad"]))) {
+        if (isset($_REQUEST["title"])) $hist = $_REQUEST["title"];
+        if (isset($_REQUEST["chapterToLoad"])) $ch_id = $_REQUEST["chapterToLoad"];
         //Search Database and Get Cursor
-        $query = array("ch_id" => $ch_id);
+        if (isset($hist)) $query = array("title" => $hist);
+        else       $query = array("ch_id" => $ch_id);
+              
         $cursor =  $history_collection->find($query, array("title"=>1, "events"=>1)); //should be findOne()  ??
 
         foreach ($cursor as $doc) {
@@ -37,54 +40,35 @@ Description: Creates a timeline with search and hover functions. Information acc
           echo "<h1> History: $title </h1>";
 
 echo '<div id="playground">';
-
-          echo '<ul class="timeline-both-side">';
-          $shouldGoLeft = true;
+    echo '<section class ="timeline">';
+       echo '<ol>';
 
           foreach($doc['events'] as $event) {
-               if ($shouldGoLeft) {  /* left side items */
+
                  echo '
                  <li>
-                 <div class="border-line"></div>
                    <div class="timeline-description">
-                     <div class="dropdown" style="float:left">';
+                     <div class="dropdown" style="float:">'; // edited out
                  echo '<button class="dropbtn">' . $event['title'] . '</button>';
                  echo '<div class="dropdown-content" style="left:0;">';
                    echo $event['hover'];
                  echo '</div>
                      </div>
-                   </div>
                  </li>';
-               } else  /* right side items */
-               {
-                 echo '
-                 <li class="opposite-side">
-                 <div class="border-line"></div>
-                   <div class="timeline-description">
-                     <div class="dropdown" style="float:left">';
-                 echo '<button class="dropbtn">' . $event['title'] . '</button>';
-                 echo '<div class="dropdown-content" style="left:0;">';
-                   echo $event['hover'];
-                 echo '</div>
-                     </div>
-                   </div>
-                 </li>';
-               }
 
-               $shouldGoLeft = !$shouldGoLeft;
           }  //end foreach doc[elements] as event
-          echo '</ul>';
+          echo '</ol>';
         } //end foreach cursor as doc
         } //end if isset()
         else
         {echo 'no history found';}
       ?>
 
-
+ 
 </div>
 </div>
 
-    <?php include ('includes/toolbar-vertical.php'); ?>
+    <?php include ('includes/toolbar.php'); ?>
     <?php include ('includes/js-includes.php'); ?>
 
     <script type="text/javascript" src="js/hilitor-utf8.js"></script>

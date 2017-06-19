@@ -11,14 +11,14 @@
   }, false);
 
 
-    function scrollUp() {
+    function scrollLeft() {
         //window.scrollBy(0,-100);
-        $('#playground').animate({scrollTop: '-=150px'}, 800);
+        $('#playground').animate({scrollLeft: '-=300px'}, 700);
     }
 
-    function scrollDown() {
+    function scrollRight() {
         //window.scrollBy(0,100);
-        $('#playground').animate({scrollTop: '+=150px'}, 800);
+        $('#playground').animate({scrollLeft: '+=300px'}, 700);
     }
 
     $('#playground').scroll(function() {
@@ -29,11 +29,11 @@
         }
     });
 
-    $('.scrollButtonUp').click(scrollUp);
-    $('.scrollButtonDown').click(scrollDown);
+    $('.scrollButtonLeft').click(scrollLeft);
+    $('.scrollButtonRight').click(scrollRight);
 
-    $('.returnToTop').click(function() {      // When arrow is clicked
+    $('.returnToLeftmost').click(function() {      // When arrow is clicked
         $('#playground').animate({
-            scrollTop : 0                       // Scroll to top of body
+            scrollLeft : 0                       // Scroll to top of body
         }, 1000);
 });
