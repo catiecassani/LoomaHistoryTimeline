@@ -50,7 +50,8 @@ echo '<div id="playground">';
                    <div class="timeline-description">
                      <div class="dropdown" style="float:">'; // edited out
                  echo '<button class="dropbtn">' . $event['title'] . '</button>';
-                 echo '<div class="dropdown-content" style="left:0;">';
+                 echo '<button class="dropdate">' . $event['date'] . '</button>';
+                 echo '<div class="dropdown-content">';
                    echo $event['hover'];
                  echo '</div>
                      </div>
