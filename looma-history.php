@@ -52,13 +52,18 @@ echo '<div id="playground">';
                 $id1 = "";
                 $id2 = "";
                 $id3 = "";
+                $msg = "";
 
                 if(isset($popinfo['id1']))
                   $id1 = 'data-id1=' . $popinfo['id1'];
                 if(isset($popinfo['id2']))
                   $id2 = 'data-id2='. $popinfo['id2'];
                 if(isset($popinfo['id3']))
-                  $id3 = 'data-id3=' . $popinfo['id3']; /*doesn't check if they exist like it should :(*/
+                  $id3 = 'data-id3=' . $popinfo['id3'];
+
+                if(isset($popinfo['msg']))
+                  $msg = 'data-msg=' . $popinfo['msg'];
+                 /*doesn't check if they exist like it should :(*/
 
                 /*
       
@@ -77,7 +82,7 @@ echo '<div id="playground">';
                  <li>
                    <div class="timeline-description">
                      <div class="dropdown" style="float:">'; // edited out
-                 echo '<button class="dropbtn"' . " id=" . $count . " " . $id1 . " " . $id2 . " " . $id3 . '>' . $event['title'] . '</button>';
+                 echo '<button class="dropbtn"' . " id=" . $count . " " . $id1 . " " . $id2 . " " . $id3 . " " . $msg . '>' . $event['title'] . '</button>';
                  echo '<button class="dropdate" disabled="true">' . $event['date'] . '</button>';
                      '</div>
                  </li>';
