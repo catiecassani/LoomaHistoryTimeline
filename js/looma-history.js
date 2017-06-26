@@ -1,6 +1,5 @@
   var myHilitor;
 
-
   document.addEventListener("DOMContentLoaded", function() {
     myHilitor = new Hilitor2("playground");
     myHilitor.setMatchType("left");
@@ -37,3 +36,40 @@
             scrollLeft : 0                       // Scroll to top of body
         }, 1000);
 });
+    //POPUP STUFF
+    $('body').click(function(e) {
+
+        var target = $(e.target);
+
+        if (target.is('.dropbtn'))
+        {
+            var historypopup = function(msg, notTransparent){
+
+
+            if (!notTransparent) LOOMA.makeTransparent();
+            $(document.body).append("<div class= 'popup'>" +
+            "<button class='popup-button' id='dismiss-popup'><b>X</b></button>"+ msg +
+            LOOMA.translatableSpans("OK", "ठिक छ") + "</button></div>").hide().fadeIn(1000);
+
+            LOOMA.makeActivityButton($(target).attr("data-id1"), $(".popup"));
+            LOOMA.makeActivityButton($(target).attr("data-id2"), $(".popup"));
+
+
+             $('#dismiss-popup').click(function() {
+             // $("#close-popup").off('click');
+             //$("#dismiss-popup").off('click');
+             LOOMA.closePopup();
+            });
+ /*   $('#dismiss-popup').click(function() {
+        LOOMA.closePopup()
+    });
+*/
+            };  //end alert()
+            historypopup("The territory of Nepal has a recorded history since the Neolithic age. The name 'Nepal' is first recorded in texts from the Vedic Age, the era which founded Hinduism, the predominant religion of the country. In the middle of the first millennium BCE, Gautama Buddha, the founder of Buddhism, was born in southern Nepal. Parts of northern Nepal were intertwined with the culture of Tibet. ", false);
+        }
+
+    })
+
+
+
+

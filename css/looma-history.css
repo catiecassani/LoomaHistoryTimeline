@@ -18,7 +18,7 @@ button {
 .timeline ol {
   font-size: 0;
   width: 100vw;
-  padding: 150px 0;
+  padding: 300px 0;
 }
 
 /*The display of the line of the timeline*/
@@ -31,12 +31,6 @@ button {
   background: #fff;
 }
 
-/*Extends the last event's line so that the last event 
-  remains on top of a timeline, instead of above empty space*/
-.timeline ol li:last-child {
-  width: 280px;
-}
-
 /*Aligns each white line segment to be in the proper position, 
   relative to the each event point (yellow dot)*/
 .timeline ol li:not(:first-child) {
@@ -44,7 +38,7 @@ button {
 }
 
 /*The display of each event point in the timeline*/
-.timeline ol li:not(:last-child)::after {
+.timeline ol li::after {
   content: '';
   position: absolute;
   top: 50%;
@@ -55,6 +49,7 @@ button {
   transform: translateY(-50%);
   border-radius: 50%; /*Determines the "roundness" of each point*/
   background: #ffff00;
+  z-index:1;
 }
 
 /*The positioning of the event information 
@@ -66,6 +61,7 @@ button {
   font-size: 1rem;
   white-space: normal;
   color: black; /*The color of the hover text*/
+  z-index:2;
 }
 
 /*Specific position of each odd list item
@@ -98,24 +94,37 @@ input#keywords {display:inline;}
 /*Keeps the timeline event buttons centered above the timeline points*/
 .timeline li .timeline-description {
   border-radius: 2px;
-  /* background-color: #ddd; */
-  /* border: 1px solid white; */
   float: left;
   padding: 10px;
-  /* position: relative; */
   width: 42%;
 }
+
+.dropdown {
+  width:100%;
+  display: inline-block;
+  font-size: 24;
+}
+
+.dropdown-content {
+  display: none;
+  background-color: #ffffff;
+  font: 20px "Comic Sans MS", serif, bold;
+  border-color: white;
+  height:inherit;
+  width:inherit;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  font: 20px;
+
+}
+
 
 /*The display of the timeline event button*/
 .dropbtn {
   padding: 10px;
-  /*margin-top: .25vh;
-  margin-bottom: 10;*/
   font: 1em "Comic Sans MS", serif, bold;
   cursor: pointer;
   width:100%;
   min-width: 8vw;
-  /*i changed this so the box would adjust to the text, originally 15vh*/
   height: inherit;
   background-color: #FFFFFF;
   color: black;
@@ -123,37 +132,32 @@ input#keywords {display:inline;}
   box-shadow:         1px 1px 3px rgba(0, 0, 0, 0.30);
 }
 
-/*Keeps the odd timeline event buttons 
-  properly spaced above the hover texts*/
-.timeline ol li:nth-child(odd) .dropbtn{
-  margin-bottom:5vh;
+.dropdate {
+  padding: 10px;
+  font: 1em "Comic Sans MS", serif, bold;
+  cursor: pointer;
+  width:100%;
+  min-width: 8vw;
+  height: inherit;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffff00), color-stop(100%,#ffff00)); /* webkit */
 }
 
 /*Keeps the even timeline event buttons 
   properly spaced above the hover texts*/
 .timeline ol li:nth-child(even) .dropbtn{
-  margin-top:2vh;
-  margin-bottom:2.7vh;
+
 }
 
-/*The display for the hover text*/
-.dropdown-content {
-  position: inherit;
-  background-color: #a2b2cf;
-  font: 20px "Comic Sans MS", serif, bold;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  border-radius:10px;
-  font: 20px;
+.timeline ol li:nth-child(even) div .dropdate{
+  margin-top: 1vh;
 }
 
-/*Makes the hover text display visible
-  --when deleted makes the text appear only when the user hovers
-    (the display for this is a little screwy)*/
-.timeline ol li:nth-child(odd) .dropdown-content,
-.timeline ol li:nth-child(even) .dropdown-content {
-  display:inline;
-  top:inherit;
+/*Keeps the odd timeline event buttons 
+  properly spaced above the hover texts*/
+.timeline ol li:nth-child(odd) .dropbtn{
+  margin-bottom:1vh;
 }
+
 
 /*Makes the button images visible*/
 button img {height:100%;width:100%;}
@@ -214,4 +218,23 @@ label {
   width: 25vw;;
   height: 7vh;
   border-radius: 10px;
+}
+
+/* DROPBTN/POPUP WINDOW DISPLAY*/
+.popup {
+    font-size:inherit;
+    margin-top: -180;
+}
+
+button.img.play, button.img.activity {
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: initial;
+    margin-left: 1vh;
+}
+
+.popup button {
+  margin: 3vh;
+  display:inline-block;
+  margin-left: -55;
 }

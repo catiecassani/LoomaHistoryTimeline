@@ -43,19 +43,46 @@ echo '<div id="playground">';
     echo '<section class ="timeline">';
        echo '<ol>';
 
-          foreach($doc['events'] as $event) {
+                        $count = 0;
 
+          foreach($doc['events'] as $event) {
+                /*working on getting id recognition working*/
+                foreach($event['popup'] as $popinfo) {
+
+                $id1 = "";
+                $id2 = "";
+                $id3 = "";
+
+                if(isset($popinfo['id1']))
+                  $id1 = 'data-id1=' . $popinfo['id1'];
+                if(isset($popinfo['id2']))
+                  $id2 = 'data-id2='. $popinfo['id2'];
+                if(isset($popinfo['id3']))
+                  $id3 = 'data-id3=' . $popinfo['id3']; /*doesn't check if they exist like it should :(*/
+
+                /*
+      
+                if($event.popup.id2)
+                  $id2 = 'data-id2= "$event.popup.id2 "';
+
+                if($event.popup.id3)
+                  $id3 = 'data-id3= "$event.popup.id3 "';
+
+                /*and a bit below (the id part)*/
+                }
+
+                $count += 1;
+            
                  echo '
                  <li>
                    <div class="timeline-description">
                      <div class="dropdown" style="float:">'; // edited out
-                 echo '<button class="dropbtn">' . $event['title'] . '</button>';
-                 echo '<button class="dropdate">' . $event['date'] . '</button>';
-                 echo '<div class="dropdown-content">';
-                   echo $event['hover'];
-                 echo '</div>
-                     </div>
+                 echo '<button class="dropbtn"' . " id=" . $count . " " . $id1 . " " . $id2 . " " . $id3 . '>' . $event['title'] . '</button>';
+                 echo '<button class="dropdate" disabled="true">' . $event['date'] . '</button>';
+                     '</div>
                  </li>';
+
+                 
 
           }  //end foreach doc[elements] as event
           echo '</ol>';
